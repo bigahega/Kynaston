@@ -2,7 +2,6 @@ package Service.Replication;
 
 import Database.Kynaston;
 import Service.TxObjects.Request;
-import Service.TxObjects.RequestType;
 import Service.TxObjects.Response;
 import Service.TxObjects.ResponseType;
 
@@ -15,12 +14,12 @@ import java.util.List;
 /**
  * Created by berkinguler on 20/11/2016.
  */
-public class PrimaryBackup extends ReplicationStrategy {
+public class PrimaryBackupReplicationStrategy extends AbstractReplicationStrategy {
 
     private ArrayList<String> replicaList;
     private PrimaryBackupReplicaType replicaType;
 
-    public PrimaryBackup(Socket client, List<String> replicaList, PrimaryBackupReplicaType replicaType) {
+    public PrimaryBackupReplicationStrategy(Socket client, List<String> replicaList, PrimaryBackupReplicaType replicaType) {
         super(client);
         this.replicaList = new ArrayList<>(replicaList);
         this.replicaType = replicaType;
@@ -74,6 +73,12 @@ public class PrimaryBackup extends ReplicationStrategy {
     }
 
     private void backupWorker() {
+        try(ObjectInput input = new ObjectInputStream(this.client.getInputStream())) {
+            while(true) {
 
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

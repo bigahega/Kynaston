@@ -9,8 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by Berkin GÜLER (bguler15@ku.edu.tr) on 14.11.2016.
  */
-public class CompressedCheckpoint extends BaseCheckpoint implements Checkpoint {
-    private CheckpointType checkpointType;
+public class CompressedCheckpoint extends BaseCheckpoint implements ICheckpoint {
+    private CheckpointType checkpointType = CheckpointType.Full;
     private CompressionType compressionType;
 
     public void setCheckpointType(CheckpointType checkpointType) {
@@ -23,7 +23,7 @@ public class CompressedCheckpoint extends BaseCheckpoint implements Checkpoint {
 
     @Override
     public byte[] createCheckpoint(ConcurrentHashMap<String, String> database) {
-        Checkpoint checkpointer;
+        ICheckpoint checkpointer;
         switch (this.checkpointType) {
             case Full:
                 checkpointer = new FullCheckpoint();
@@ -35,12 +35,9 @@ public class CompressedCheckpoint extends BaseCheckpoint implements Checkpoint {
                 checkpointer = new DifferentialCheckpoint();
                 break;
             default:
-                checkpointer = null;
+                checkpointer = new FullCheckpoint();
                 break;
         }
-
-        if(checkpointer == null)
-            return null;
 
         byte[] uncompressedCheckpoint = checkpointer.createCheckpoint(database);
         Compressor compressor = CompressorFactory.getInstance().getCompressor(this.compressionType);

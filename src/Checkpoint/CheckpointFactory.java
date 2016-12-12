@@ -13,7 +13,7 @@ public class CheckpointFactory {
     private CheckpointFactory() {
     }
 
-    public Checkpoint getCheckpoint(CheckpointType checkpointType) {
+    public ICheckpoint getCheckpoint(CheckpointType checkpointType) {
         switch (checkpointType) {
             case Full:
                 return new FullCheckpoint();

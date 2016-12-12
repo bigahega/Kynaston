@@ -10,10 +10,10 @@ import java.net.Socket;
 /**
  * Created by berkinguler on 20/11/2016.
  */
-public abstract class ReplicationStrategy extends Thread {
+public abstract class AbstractReplicationStrategy extends Thread {
 
     Socket client;
-    ReplicationStrategy(Socket client) {
+    AbstractReplicationStrategy(Socket client) {
         this.client = client;
     }
 

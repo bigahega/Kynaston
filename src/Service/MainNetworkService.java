@@ -1,13 +1,12 @@
 package Service;
 
-import Service.Replication.PrimaryBackup;
+import Service.Replication.PrimaryBackupReplicationStrategy;
 import Service.Replication.PrimaryBackupReplicaType;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by berkinguler on 20/11/2016.
@@ -30,7 +29,7 @@ public class MainNetworkService {
 
             while(true) {
                 Socket client = this.listenerSocket.accept();
-                PrimaryBackup handler = new PrimaryBackup(client, replicaList, replicaType);
+                PrimaryBackupReplicationStrategy handler = new PrimaryBackupReplicationStrategy(client, replicaList, replicaType);
                 handler.start();
             }
         } catch (IOException ex) {

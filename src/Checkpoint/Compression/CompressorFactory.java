@@ -14,6 +14,8 @@ public class CompressorFactory {
     }
 
     public Compressor getCompressor(CompressionType compressionType) {
+        if(compressionType == null)
+            compressionType = CompressionType.Deflate;
         switch (compressionType) {
             case Deflate:
                 return new DeflateCompressor();
@@ -22,7 +24,7 @@ public class CompressorFactory {
             case ZStd:
                 return new ZStdCompressor();
             default:
-                return null;
+                return new DeflateCompressor();
         }
     }
 }

@@ -16,7 +16,7 @@ public class MainKynaston {
         String replicaType = args[1];
         String checkpointType = args[2];
 
-        ArrayList<String> replicaList = Utilities.readReplicaList(replicaListFile);
+        ArrayList<String> replicaList = Utilities.readLinesToArrayList(replicaListFile);
 
         Kynaston.getInstance().setCheckpointType(Utilities.getEnumFromString(CheckpointType.class, checkpointType));
 

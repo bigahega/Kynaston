@@ -8,9 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by Berkin GÜLER (bguler15@ku.edu.tr) on 14.11.2016.
  */
-public abstract class BaseCheckpoint implements Checkpoint {
+abstract class BaseCheckpoint implements ICheckpoint {
 
-    protected byte[] hashmapToByteArray(ConcurrentHashMap<String, String> map) {
+    byte[] hashmapToByteArray(ConcurrentHashMap<String, String> map) {
         byte[] out = null;
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
