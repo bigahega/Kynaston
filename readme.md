@@ -1,23 +1,11 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
-TODO: Write a project description
-## Installation
-TODO: Describe the installation process
+# Kynaston
+Kynaston is a replicated in-memory Key-Value store featuring checkpointing approach. For now,
+it only supports primary-backup replication and chain replication is on its way already. It also
+includes various checkpointing algorithms such as full, incremental, differential, compressed and
+periodic flavors of those.
 ## Usage
-TODO: Write usage instructions
+Each replica has to be run on its own server. Further instructions will be added shortly.
 ## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+For now, the project is not open for any contribution when its in Alpha stage.
 ## History
-TODO: Write history
-## Credits
-TODO: Write credits
-## License
-TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
+v0.1 - Alpha
