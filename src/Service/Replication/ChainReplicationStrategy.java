@@ -11,7 +11,6 @@ public class ChainReplicationStrategy extends AbstractReplicationStrategy {
     private ArrayList<String> replicaList;
 
     public ChainReplicationStrategy(Socket client, ArrayList<String> replicaList) {
-        super(client);
         this.replicaList = replicaList;
     }
 }

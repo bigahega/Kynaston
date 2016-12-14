@@ -13,9 +13,6 @@ import java.net.Socket;
 public abstract class AbstractReplicationStrategy extends Thread {
 
     Socket client;
-    AbstractReplicationStrategy(Socket client) {
-        this.client = client;
-    }
 
     void killReplica(String replicaAddress) {
         try {

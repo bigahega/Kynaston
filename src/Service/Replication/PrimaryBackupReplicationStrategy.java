@@ -19,10 +19,13 @@ public class PrimaryBackupReplicationStrategy extends AbstractReplicationStrateg
     private ArrayList<String> replicaList;
     private PrimaryBackupReplicaType replicaType;
 
-    public PrimaryBackupReplicationStrategy(Socket client, List<String> replicaList, PrimaryBackupReplicaType replicaType) {
-        super(client);
+    public PrimaryBackupReplicationStrategy(List<String> replicaList, PrimaryBackupReplicaType replicaType) {
         this.replicaList = new ArrayList<>(replicaList);
         this.replicaType = replicaType;
+    }
+
+    public void setClient(Socket client) {
+        this.client = client;
     }
 
     @Override
@@ -39,7 +42,6 @@ public class PrimaryBackupReplicationStrategy extends AbstractReplicationStrateg
 
     private void primaryWorker() {
         try(ObjectInput input = new ObjectInputStream(this.client.getInputStream())) {
-            while(true) {
                 Object requestObj = input.readObject();
                 if(requestObj instanceof Integer && (int)requestObj == 0xDEADBABA) {
                     this.replicaList.parallelStream().forEach(this::killReplica);
@@ -66,7 +68,6 @@ public class PrimaryBackupReplicationStrategy extends AbstractReplicationStrateg
                     outputObj.flush();
                     outputObj.close();
                 }
-            }
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -74,9 +75,7 @@ public class PrimaryBackupReplicationStrategy extends AbstractReplicationStrateg
 
     private void backupWorker() {
         try(ObjectInput input = new ObjectInputStream(this.client.getInputStream())) {
-            while(true) {
 
-            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

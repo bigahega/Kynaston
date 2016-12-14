@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class MainNetworkService {
 
     public static int networkPort = 1881;
-    private ServerSocket listenerSocket;
     private ArrayList<String> replicaList;
     private PrimaryBackupReplicaType replicaType;
 
@@ -25,11 +24,12 @@ public class MainNetworkService {
 
     public void startService() {
         try {
-            this.listenerSocket = new ServerSocket(networkPort);
+            ServerSocket listenerSocket = new ServerSocket(networkPort);
 
             while(true) {
-                Socket client = this.listenerSocket.accept();
-                PrimaryBackupReplicationStrategy handler = new PrimaryBackupReplicationStrategy(client, replicaList, replicaType);
+                Socket client = listenerSocket.accept();
+                PrimaryBackupReplicationStrategy handler = new PrimaryBackupReplicationStrategy(replicaList, replicaType);
+                handler.setClient(client);
                 handler.start();
             }
         } catch (IOException ex) {
